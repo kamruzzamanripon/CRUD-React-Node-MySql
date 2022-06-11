@@ -9,10 +9,11 @@ function App() {
   const [allTodoList, setAllTodoList] = useState('')
   const [addTodoData, setAddTodoData] = useState('')
   const [addPriorityData, setAddPriorityData] = useState('')
+  const apiUrl = "https://nodeserver.kamruzzaman.xyz/"
 
   //Fetch All Todo data
   const allTodo = () => {
-    axios.get("http://localhost:4000/all").then((response) => {
+    axios.get(`${apiUrl}/all`).then((response) => {
       console.log("all", response)
       setAllTodoList(response.data);
     });
@@ -23,7 +24,7 @@ function App() {
   const addDataHandler = (e)=>{
     e.preventDefault();
     //console.log("input Value", addTodoData, addPriorityData)
-    axios.post("http://localhost:4000/create",{todo:addTodoData, priority:addPriorityData}).then((response) => {
+    axios.post(`${apiUrl}/create`,{todo:addTodoData, priority:addPriorityData}).then((response) => {
       console.log("all", response)
       allTodo();
       setAddTodoData('');
@@ -35,7 +36,7 @@ function App() {
   const deleteHandler = (e, todo)=>{
     e.preventDefault();
     console.log("todo info", todo.id)
-    axios.delete(`http://localhost:4000/delete/${todo.id}`).then((response) => {
+    axios.delete(`${apiUrl}/delete/${todo.id}`).then((response) => {
       console.log("all", response)
       allTodo();
     });
@@ -47,7 +48,7 @@ function App() {
     e.preventDefault();
     console.log("update Data", editData, todo )
 
-    axios.put("http://localhost:4000/update", { priority: editData, id: todo.id }).then(
+    axios.put(`${apiUrl}/update`, { priority: editData, id: todo.id }).then(
       (response) => {
         allTodo();
         setEditData('');
@@ -59,7 +60,7 @@ function App() {
 
   //1st initial data fetch
   useEffect(()=>{
-    axios.get("http://localhost:4000/all").then((response) => {
+    axios.get(`${apiUrl}/all`).then((response) => {
       console.log("all", response)
       setAllTodoList(response.data);
     });
@@ -70,6 +71,7 @@ function App() {
     <div className="App">
       <div className='flex  px-5 mt-10'>
         
+        {/* Input Section */}
         <div className='w-1/3 border-2 mr-2 px-5'>
           <h1 className='font-bold text-3xl mb-5 underline underline-offset-8 mt-5'>Type your to do List</h1>
           <label className='block text-left text-lg font-semibold'>Todo</label>
@@ -78,11 +80,13 @@ function App() {
           <input className='w-full border-2 mb-5' type="text" placeholder='Priority' value={addPriorityData} onChange={(e)=>setAddPriorityData(e.target.value)} /> <br />
           <button className='bg-green-600 block text-center w-full mb-10 text-white font-semibold py-5' onClick={(e)=> addDataHandler(e)}>Add Todo</button>
         </div>
+        {/* End Input Section */}
 
 
-
+        {/* Output Section */}
         <div className='border-2 w-full pl-5'>
           <h1 className='font-bold text-3xl mb-5 underline underline-offset-8 mt-5'>This is our Todo List</h1>
+          
           <ul>
             {allTodoList.length > 0 && allTodoList.map((todo,index)=>(
                 <li className='text-left text-lg border-2 border-black p-2 mr-5 mb-2' key={index}>
@@ -102,10 +106,9 @@ function App() {
                 </div>
               </li>
             ))}
-            
-           
           </ul>
         </div>
+        {/* End Output Section */}
 
 
       </div>

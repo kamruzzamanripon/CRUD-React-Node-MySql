@@ -45,11 +45,13 @@ function App() {
             <li className='text-left text-lg border-2 border-black p-2 mr-5 mb-2'>
               <div className="flex">
                 <div>Tomorrow i will do react project <span className={`text-pink-700 font-bold ${!editStatus ? "inline" : "hidden"} `}>Medium</span></div>
+                
                 <div className={`${editStatus ? "block" : "hidden"}`}>
                   <input className="border-2" type="text" value={editData} onChange={(e)=>setEditData(e.target.value)}/>
                   <button className="bg-green-600 p-1 text-white mx-2">Update</button>
                   <button className="bg-red-600 p-1 text-white mx-2" onClick={()=>setEditStatus(false)}>Cancel</button>
                 </div>
+                
               </div>
               <div className='space-x-10 border-t-4 border-yellow-500'>
                 <button >Delete</button>
