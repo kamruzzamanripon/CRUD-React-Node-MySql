@@ -12,5 +12,5 @@
 
 5. Go to client folder and open your terminal. than type command npm install . so all are package install in your client folder.
 6. type command in your terminal npm start
-7. Chekc your Url. Like as http://localhost:3000
+7. Check your Url. Like as http://localhost:3000
 8. enjoy :)
